@@ -1,25 +1,20 @@
-import React from 'react';
-import {connect} from 'react-redux'
-import { fetchSmurf } from '../store/actions';
+import React, { useContext } from 'react';
+import { context } from './context'
 
-const Smurfs = props => {
+
+
+const Smurfs = () => {
+    const {smurfs} = useContext(context)
     return (
-        <div>
-            {props.smurfs.map(smurf ={
-               return <Smurf key={smurf.name} smurf={smurf} />})}
-        </div>
+        smurfs.map(smurf =>{
+            return (
+            <div key={smurf.id}>
+                <h2>{smurf.name}</h2>
+            </div>
+            )
+        })
+        
     )
 }
 
-const mapStateToProps = state => {
-    console.log(state)
-    return {
-        error: state.error,
-        smurfs: state.smurfs,
-        fetchSmurf: state.fetchSmurf,
-       // addSmurf: state.addSmurf
-    }
-}
-
-
-export default connect(mapStateToProps,{fetchSmurf})(Smurfs)
+export default Smurfs;
